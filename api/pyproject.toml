@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "aom-api"
+version = "0.1.0"
+description = ""
+authors = ["GareArc <chen4851@purdue.edu>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.group.lint.dependencies]
+dotenv-linter = "^0.5.0"
+ruff = "^0.8.6"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = {extras = ["async"], version = "^3.1.0"}
+pydantic = "^2.10.4"
+beanie = {extras = ["srv"], version = "^1.28.0"}
+asyncio = "^3.4.3"
+flask-restful = "^0.3.10"
+pydantic-settings = "^2.7.1"
+gunicorn = "^23.0.0"
+gevent = "^24.11.1"
+flask-cors = "^5.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
