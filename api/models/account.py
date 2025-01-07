@@ -1,10 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
-from beanie import Document, Link
+from bunnet import Document, Link
 from pydantic import Field
-
-from models.order import Paycheck
 
 
 class PaymentRecord(Document):
@@ -17,7 +15,7 @@ class Account(Document):
     name: str
     avatar: Optional[str] = None
     email: Optional[str] = Field(None, description="Email address")
-    remaining_paychecks: list[Paycheck] = Field([], alias="remainingPaychecks")
+    remaining_paychecks: list["Paycheck"] = Field([], alias="remainingPaychecks")
     payment_records: list[Link["PaymentRecord"]] = Field([], alias="paymentRecords")
 
     def get_total_remaining_pay(self) -> float:

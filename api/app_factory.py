@@ -17,6 +17,7 @@ def create_app() -> AomApp:
     app = create_app_with_config()
 
     # initialize extensions
+    logging.info("Initializing extensions")
     initialize_extensions(app)
 
     end_time = time.perf_counter()
@@ -29,10 +30,7 @@ def initialize_extensions(app: AomApp):
     start_time = time.perf_counter()
 
     # initialize extensions
-    from extensions import (
-        ext_commands,
-        ext_mongodb,
-    )
+    from extensions import ext_commands, ext_mongodb
 
     extensions = [
         ext_mongodb,

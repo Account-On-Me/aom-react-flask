@@ -1,30 +1,30 @@
 import logging
 
-from beanie import DeleteRules
+from bunnet import DeleteRules
 
 from models.account import Account
 
 
 class AccountService:
     @staticmethod
-    async def get_all_accounts():
-        return await Account.find_all(fetch_links=True).to_list()
+    def get_all_accounts():
+        return Account.find_all(fetch_links=True).to_list()
 
     @staticmethod
-    async def get_account(account_id):
-        return await Account.find_one(account_id, fetch_links=True)
+    def get_account(account_id):
+        return Account.find_one(account_id, fetch_links=True).run()
 
     @staticmethod
-    async def create_account(data: Account):
-        return await data.save()
+    def create_account(data: Account):
+        # save account
+        account = Account.save(data)
+        return account
 
     @staticmethod
-    async def delete_account(account_id):
-        account = await Account.find_one(account_id)
+    def delete_account(account_id: str):
+        account = Account.find_one(Account.id == account_id).run()
         if account:
-            await account.delete(link_rule=DeleteRules.DELETE_LINKS)
-            return account
-        return None
+            account.delete(DeleteRules.DELETE_LINKS)
 
     @staticmethod
     def validate_account(data):
